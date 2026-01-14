@@ -2,56 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
-use App\Models\PenawaranKrs;
 use Illuminate\Http\Request;
+use App\Models\PenawaranKrs;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\DB;
 
 class KrsMahasiswaController extends Controller
 {
-    // tampilkan penawaran (checkbox)
-    public function pilih(Request $request)
+    // tampilkan daftar penawaran krs (checkbox)
+    public function pilih()
     {
-        // sementara: hardcode npm dulu (nanti diganti dari login)
-        $npm = $request->query('npm', '123'); // ganti default sesuai npm yang kamu punya
+        $penawaran = PenawaranKrs::orderBy('id', 'desc')->get();
 
-        $mahasiswa = Mahasiswa::findOrFail($npm);
-        $penawaran = PenawaranKrs::orderBy('hari')->orderBy('jam')->get();
+        // sementara kita pakai mahasiswa pertama dulu (nanti diganti auth login)
+        $mahasiswa = Mahasiswa::first();
 
-        // yg sudah dipilih sebelumnya
-        $selectedIds = $mahasiswa->krsAmbil()->pluck('penawaran_krs.id')->toArray();
-
-        return view('krs_mahasiswa.pilih', compact('mahasiswa','penawaran','selectedIds'));
+        return view('krs_mahasiswa.pilih', compact('penawaran', 'mahasiswa'));
     }
 
-    // simpan pilihan checkbox
+    // simpan pilihan ke tabel pivot krs_mahasiswa
     public function simpan(Request $request)
     {
-        $validated = $request->validate([
-            'npm' => 'required|exists:mahasiswa,npm',
-            'penawaran_ids' => 'array',
-            'penawaran_ids.*' => 'integer|exists:penawaran_krs,id',
+        $request->validate([
+            'npm' => 'required|string|max:15|exists:mahasiswa,npm',
+            'penawaran' => 'required|array',
+            'penawaran.*' => 'integer|exists:penawaran_krs,id',
+            'tahun_ajaran' => 'nullable|string|max:9',
         ]);
 
-        $mahasiswa = Mahasiswa::findOrFail($validated['npm']);
-        $ids = $validated['penawaran_ids'] ?? [];
+        $npm = $request->npm;
+        $tahunAjaran = $request->tahun_ajaran;
 
-        // replace pilihan (sync)
-        $mahasiswa->krsAmbil()->sync($ids);
+        // hapus dulu data lama (supaya hasilnya sesuai pilihan terbaru)
+        DB::table('krs_mahasiswa')->where('npm', $npm)->delete();
 
-        return redirect()->route('krs.mahasiswa.hasil', ['npm' => $mahasiswa->npm])
-            ->with('success', 'KRS berhasil disimpan.');
+        // insert ulang pilihan
+        foreach ($request->penawaran as $penawaranId) {
+            DB::table('krs_mahasiswa')->insert([
+                'npm' => $npm,
+                'penawaran_krs_id' => $penawaranId,
+                'tahun_ajaran' => $tahunAjaran,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return redirect()->route('krs.hasil')->with('success', 'KRS berhasil disimpan.');
     }
 
-    // tampil hasil KRS yg sudah diambil (tanpa dosen sesuai maumu)
-    public function hasil(Request $request, $npm)
+    // tampilkan hasil krs mahasiswa (tanpa kolom dosen)
+    public function hasil()
     {
-        $mahasiswa = Mahasiswa::findOrFail($npm);
+        $mahasiswa = Mahasiswa::first();
 
-        $diambil = $mahasiswa->krsAmbil()
-            ->orderBy('hari')
-            ->orderBy('jam')
+        $data = DB::table('krs_mahasiswa as km')
+            ->join('penawaran_krs as pk', 'pk.id', '=', 'km.penawaran_krs_id')
+            ->select(
+                'pk.hari',
+                'pk.jam',
+                'pk.ruang',
+                'pk.kode_mk',
+                'pk.matakuliah',
+                'pk.sks',
+                'km.tahun_ajaran'
+            )
+            ->where('km.npm', $mahasiswa->npm)
+            ->orderBy('pk.hari')
+            ->orderBy('pk.jam')
             ->get();
 
-        return view('krs_mahasiswa.hasil', compact('mahasiswa','diambil'));
+        return view('krs_mahasiswa.hasil', compact('mahasiswa', 'data'));
     }
 }
