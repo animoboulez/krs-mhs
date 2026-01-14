@@ -2,16 +2,16 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Penawaran KRS</title>
+    <title>KRS Admin</title>
 </head>
 <body>
-    <h2>Penawaran KRS (Admin)</h2>
+    <h2>KRS Admin</h2>
 
     @if(session('success'))
         <p style="color:green">{{ session('success') }}</p>
     @endif
 
-    <a href="{{ route('penawaran-krs.create') }}">+ Tambah Penawaran</a>
+    <a href="{{ route('penawaran-krs.create') }}">Tambah Matakuliah</a>
 
     <table border="1" cellpadding="8" cellspacing="0" style="margin-top:10px; width:100%">
         <thead>
@@ -53,7 +53,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="8" style="text-align:center">Belum ada penawaran KRS</td>
+                <td colspan="8" style="text-align:center">Belum ada data</td>
             </tr>
         @endforelse
         </tbody>
