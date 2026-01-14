@@ -48,10 +48,10 @@
                     <td>{{ $i+1 }}</td>
                     <td>{{ $p->hari }}</td>
                     <td>{{ $p->jam }}</td>
-                    <td>{{ $p->ruang }}</td>
+                    <td>{{ $p->ruang_kelas }}</td>
                     <td>{{ $p->kode_mk }}</td>
-                    <td>{{ $p->dosen }}</td>
-                    <td>{{ $p->matakuliah }}</td>
+                    <td>{{ $p->nama_dosen }}</td>
+                    <td>{{ $p->nama_mk }}</td>
                     <td>{{ $p->sks }}</td>
                 </tr>
                 @endforeach
