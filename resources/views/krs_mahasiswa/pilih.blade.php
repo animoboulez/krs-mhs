@@ -19,8 +19,7 @@
 
         <input type="hidden" name="npm" value="{{ $mahasiswa?->npm }}">
 
-        <label>Tahun Ajaran (opsional):</label>
-        <input type="text" name="tahun_ajaran" placeholder="2025/2026" value="{{ old('tahun_ajaran') }}">
+        <label>Tahun Akademik : 2026/2027</label>
         <br><br>
 
         @error('penawaran') <p style="color:red">{{ $message }}</p> @enderror

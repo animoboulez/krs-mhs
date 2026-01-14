@@ -14,6 +14,9 @@
     <p><b>NPM:</b> {{ $mahasiswa?->npm }}</p>
     <p><b>Nama:</b> {{ $mahasiswa?->nama }}</p>
 
+    <label>Tahun Akademik : 2026/2027</label>
+        <br><br>
+
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
             <tr>
@@ -24,7 +27,6 @@
                 <th>Kode MK</th>
                 <th>Mata Kuliah</th>
                 <th>SKS</th>
-                <th>Tahun Ajaran</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +39,6 @@
                 <td>{{ $row->kode_mk }}</td>
                 <td>{{ $row->nama_mk }}</td>
                 <td>{{ $row->sks }}</td>
-                <td>{{ $row->tahun_ajaran }}</td>
             </tr>
             @empty
             <tr>

@@ -24,7 +24,7 @@ class KrsMahasiswaController extends Controller
     public function simpan(Request $request)
     {
         $request->validate([
-            'npm' => 'required|string|max:15|exists:mahasiswa,npm',
+            'npm' => 'required|exists:mahasiswa,npm',
             'penawaran' => 'required|array',
             'penawaran.*' => 'integer|exists:penawaran_krs,id',
             'tahun_ajaran' => 'nullable|string|max:9',
@@ -60,9 +60,9 @@ class KrsMahasiswaController extends Controller
             ->select(
                 'pk.hari',
                 'pk.jam',
-                'pk.ruang',
+                'pk.ruang_kelas',
                 'pk.kode_mk',
-                'pk.matakuliah',
+                'pk.nama_mk',
                 'pk.sks',
                 'km.tahun_ajaran'
             )
