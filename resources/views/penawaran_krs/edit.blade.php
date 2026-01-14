@@ -45,6 +45,11 @@
         </div>
 
         <div>
+            <label>Nama Dosen</label><br>
+            <input type="text" name="nama_dosen" value="{{ old('nama_dosen', $item->nama_dosen) }}">
+        </div>
+
+        <div>
             <label>SKS</label><br>
             <input type="number" name="sks" value="{{ old('sks', $item->sks) }}" min="1" max="10" required>
         </div>

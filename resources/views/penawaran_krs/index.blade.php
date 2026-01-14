@@ -21,6 +21,7 @@
                 <th>Jam</th>
                 <th>Ruang</th>
                 <th>Kode MK</th>
+                <th>Dosen</th>
                 <th>Mata Kuliah</th>
                 <th>SKS</th>
                 <th>Aksi</th>
@@ -34,6 +35,7 @@
                 <td>{{ $row->jam }}</td>
                 <td>{{ $row->ruang_kelas }}</td>
                 <td>{{ $row->kode_mk }}</td>
+                <td>{{ $row->nama_dosen }}</td>
                 <td>{{ $row->nama_mk }}</td>
                 <td>{{ $row->sks }}</td>
                 <td>

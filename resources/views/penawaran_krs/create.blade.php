@@ -35,12 +35,17 @@
 
         <div>
             <label>Kode Mata Kuliah</label><br>
-            <input type="text" name="kode_mk" value="{{ old('kode_mk') }}" placeholder="IF101" required>
+            <input type="text" name="kode_mk" value="{{ old('kode_mk') }}" placeholder="IF000" required>
         </div>
 
         <div>
             <label>Mata Kuliah</label><br>
-            <input type="text" name="nama_mk" value="{{ old('nama_mk') }}" placeholder="Algoritma" required>
+            <input type="text" name="nama_mk" value="{{ old('nama_mk') }}" placeholder="Mata Kuliah" required>
+        </div>
+
+        <div>
+            <label>Nama Dosen</label><br>
+            <input type="text" name="nama_dosen" value="{{ old('nama_dosen') }}" placeholder="Nama Dosen">
         </div>
 
         <div>

@@ -9,6 +9,6 @@ class PenawaranKrs extends Model
     protected $table = 'penawaran_krs';
 
     protected $fillable = [
-        'hari','jam','ruang_kelas','kode_mk','nama_mk','sks'
+        'hari','jam','ruang_kelas','kode_mk','nama_mk','nama_dosen','sks'
     ];
 }

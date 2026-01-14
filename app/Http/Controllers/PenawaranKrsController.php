@@ -26,6 +26,7 @@ class PenawaranKrsController extends Controller
             'ruang_kelas' => 'required|string|max:50',
             'kode_mk' => 'required|string|max:10',
             'nama_mk' => 'required|string|max:100',
+            'nama_dosen' => 'nullable|string|max:100',
             'sks' => 'required|integer|min:1|max:10',
         ]);
 
@@ -49,6 +50,7 @@ class PenawaranKrsController extends Controller
             'ruang_kelas' => 'required|string|max:50',
             'kode_mk' => 'required|string|max:10',
             'nama_mk' => 'required|string|max:100',
+            'nama_dosen' => 'nullable|string|max:100',
             'sks' => 'required|integer|min:1|max:10',
         ]);
 
