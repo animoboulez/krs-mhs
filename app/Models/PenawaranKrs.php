@@ -11,4 +11,10 @@ class PenawaranKrs extends Model
     protected $fillable = [
         'hari','jam','ruang_kelas','kode_mk','nama_mk','nama_dosen','sks'
     ];
+
+    public function mahasiswaAmbil()
+    {
+        return $this->belongsToMany(Mahasiswa::class, 'krs_mahasiswa', 'penawaran_krs_id', 'npm')
+            ->withTimestamps();
+    }
 }
