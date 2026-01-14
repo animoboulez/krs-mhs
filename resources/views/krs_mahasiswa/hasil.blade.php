@@ -33,9 +33,9 @@
                 <td>{{ $i+1 }}</td>
                 <td>{{ $row->hari }}</td>
                 <td>{{ $row->jam }}</td>
-                <td>{{ $row->ruang }}</td>
+                <td>{{ $row->ruang_kelas }}</td>
                 <td>{{ $row->kode_mk }}</td>
-                <td>{{ $row->matakuliah }}</td>
+                <td>{{ $row->nama_mk }}</td>
                 <td>{{ $row->sks }}</td>
                 <td>{{ $row->tahun_ajaran }}</td>
             </tr>
