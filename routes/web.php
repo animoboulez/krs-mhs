@@ -11,6 +11,9 @@ Route::get('/', function () {
 
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('penawaran-krs', PenawaranKrsController::class);
-Route::get('/krs/pilih', [KrsMahasiswaController::class, 'pilih'])->name('krs.mahasiswa.pilih');
-Route::post('/krs/simpan', [KrsMahasiswaController::class, 'simpan'])->name('krs.mahasiswa.simpan');
-Route::get('/krs/{npm}/hasil', [KrsMahasiswaController::class, 'hasil'])->name('krs.mahasiswa.hasil');
+// Route::get('/krs/pilih', [KrsMahasiswaController::class, 'pilih'])->name('krs.mahasiswa.pilih');
+// Route::post('/krs/simpan', [KrsMahasiswaController::class, 'simpan'])->name('krs.mahasiswa.simpan');
+// Route::get('/krs/{npm}/hasil', [KrsMahasiswaController::class, 'hasil'])->name('krs.mahasiswa.hasil');
+Route::get('/pilih-krs', [KrsMahasiswaController::class, 'pilih'])->name('krs.pilih');
+Route::post('/pilih-krs', [KrsMahasiswaController::class, 'simpan'])->name('krs.simpan');
+Route::get('/hasil-krs', [KrsMahasiswaController::class, 'hasil'])->name('krs.hasil');
