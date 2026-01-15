@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>KRS Admin</title>
+    <title>KRS admin</title>
 </head>
 <body>
     <h2>KRS Admin</h2>
